@@ -1,0 +1,1345 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Health Report</title>
+    <!-- JS libraries injected inline by TemplateService -->
+    <script>{{chartjs_inline}}</script>
+    <script>{{qrcode_inline}}</script>
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            /* Brand */
+            --color-primary:        #0075BB;
+            --color-accent:         #0275BB;
+            --color-cover-red:      #FF0000;
+            --color-link:           #2b6cb0;
+
+            /* Status Ã¢â‚¬â€ backgrounds (light) */
+            --color-normal-bg:      #9AFEBB;
+            --color-borderline-bg:  #FEF8A9;
+            --color-abnormal-bg:    #FEAEB1;
+
+            /* Status Ã¢â‚¬â€ dark (badge backgrounds, trend colors) */
+            --color-normal-dark:    #008400;
+            --color-borderline-dark:#866800;
+            --color-abnormal-dark:  #8E0000;
+
+            /* Badge text */
+            --color-badge-text:     #fff;
+
+            /* Neutrals */
+            --color-neutral-100:    #EDEDED;
+            --color-neutral-200:    #d0d0d0;
+            --color-neutral-300:    #e0e0e0;
+            --color-neutral-400:    #f0f0f0;
+            --color-surface:        #f5f5f5;
+
+            /* Text */
+            --color-text-primary:   #333;
+            --color-text-secondary: #555;
+            --color-text-muted:     #888;
+        }
+
+        /* ===== RESET & BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            height: 1123px;
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+        }
+
+        .page:last-child {
+            page-break-after: avoid;
+        }
+
+        .page-content {
+            padding: 40px 50px;
+            height: 100%;
+            position: relative;
+        }
+
+        /* ===== FOOTER STRIPE ===== */
+        .footer-stripe {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            line-height: 0;
+        }
+        .footer-stripe svg {
+            display: block;
+            width: 600px;
+            height: auto;
+        }
+
+        .logo {
+            position: absolute;
+            bottom: 70px;
+            left: 50px;
+        }
+
+        .logo svg {
+            width: 360px;
+            height: auto;
+        }
+
+        /* ===== PAGE 1: COVER ===== */
+        .cover-page .page-content {
+            padding: 60px 50px;
+        }
+
+        .cover-patient {
+            font-size: 24px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .cover-divider {
+            border: none;
+            border-top: 3px solid var(--color-cover-red);
+            width: 60%;
+            margin: 0;
+        }
+
+        .cover-title {
+            font-size: 50px;
+            color: var(--color-cover-red);
+            line-height: 1.15;
+            margin: 10px 0 65px 0;
+            display: block;
+            transform: scaleY(1.5);
+            transform-origin: top left;
+        }
+
+        .cover-id {
+            font-size: 24px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .cover-heart {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cover-heart svg {
+            width: 550px;
+            height: 700px;
+        }
+
+        /* ===== PAGE 2: HOW TO READ ===== */
+        .report-title {
+            font-size: 30px;
+            font-weight: 700;
+            /* color: #333; */
+            margin-bottom: 4px;
+        }
+
+        .title-divider {
+            border: none;
+            border-top: 1.5px solid var(--color-neutral-200);
+            width: 100%;
+            margin: 0 0 12px 0;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            /* color: #333; */
+            margin: 30px 0 8px 0;
+        }
+
+        .section-desc {
+            font-size: 13px;
+            /* color: #555; */
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .sections-list {
+            list-style: square;
+            padding-left: 20px;
+        }
+
+        .sections-list li {
+            margin-bottom: 14px;
+            color: var(--color-link);
+        }
+
+        .sections-list .sec-name {
+            font-size: 15px;
+            font-style: normal;
+            color: var(--color-link);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .sections-list .sec-desc {
+            font-size: 12px;
+            color: black;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .sections-list .sec-desc span {
+            flex: 1;
+        }
+
+        .sec-placeholder {
+            flex-shrink: 0;
+            width: 65px;
+            height: 65px;
+            background: #c8c8c8;
+            border-radius: 2px;
+        }
+
+        /* ===== STEPPER NAV ===== */
+        .stepper {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+        }
+
+        .stepper-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .stepper-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-neutral-300);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stepper-dot.active {
+            background: var(--color-accent);
+            box-shadow: 0 2px 8px rgba(2,117,187,0.3);
+            width: 44px;
+            height: 44px;
+            font-size: 16px;
+        }
+
+        .stepper-label {
+            font-size: 10px;
+            color: var(--color-text-muted);
+            text-align: center;
+            max-width: 80px;
+        }
+
+        .stepper-label.active {
+            color: var(--color-text-primary);
+            font-weight: 700;
+        }
+
+        .stepper-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: calc(50% + 18px);
+            width: calc(100% - 36px);
+            height: 3px;
+            background-image: repeating-linear-gradient(90deg, #bbb 0, #bbb 10px, transparent 10px, transparent 20px);
+            background-size: 20px 3px;
+            border: none;
+            z-index: 0;
+        }
+
+        .stepper-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        /* ===== PAGE 3: HEALTH SUMMARY ===== */
+        .score-section {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .score-info {
+            flex: 1;
+        }
+
+        .section-heading {
+            width: fit-content;
+        }
+
+        .section-heading .title-divider {
+            width: 100%;
+        }
+
+        .summary-header-block {
+            margin-bottom: 16px;
+        }
+
+        .score-circle {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            flex-shrink: 0;
+        }
+
+        .score-dots-container {
+            position: absolute;
+            inset: 0;
+        }
+
+        .score-dot {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--color-neutral-100);
+        }
+
+        .gauge-wrapper {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gauge-svg {
+            transform: rotate(-90deg);
+        }
+
+        .score-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .score-value .num {
+            font-size: 56px;
+            font-weight: 800;
+            color: #000;
+            display: block;
+        }
+
+        .score-value .label {
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+
+        /* Parameter Table */
+        .param-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 6px;
+            
+        }
+
+        .param-table thead th {
+            font-size: 12px;
+            font-weight: 600;
+            background-color: var(--color-neutral-100);
+            text-align: left;
+            padding: 6px 16px;
+        }
+
+        .param-table thead th:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .param-table thead th:last-child {
+            text-align: center;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .param-table tbody td {
+            padding: 12px 16px;
+            font-size: 14px;
+            border-bottom: 1px solid var(--color-neutral-400);
+        }
+
+        .param-table tbody td:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .param-table tbody td:last-child {
+            text-align: center;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .row-normal      { background: var(--color-normal-bg); }
+        .row-borderline  { background: var(--color-borderline-bg); }
+        .row-abnormal    { background: var(--color-abnormal-bg); }
+
+        .trend-up   { color: var(--color-normal-dark);      display: inline-flex; align-items: center; }
+        .trend-down { color: var(--color-abnormal-dark);  display: inline-flex; align-items: center; }
+        .trend-same { color: var(--color-borderline-dark);    font-size: 25px; }
+        .trend-up svg, .trend-down svg { width: 18px; height: 18px; }
+
+        .param-icon { margin-right: 6px; filter: grayscale(1) brightness(0); }
+
+        /* ===== PAGE 4: TEST SUMMARY CARDS ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            padding: 10px 0;
+        }
+
+        .test-card {
+            border-radius: 20px;
+            padding: 20px 24px;
+            position: relative;
+        }
+
+        .test-card.normal     { background: var(--color-normal-bg);     border: 1px solid #fff; }
+        .test-card.borderline { background: var(--color-borderline-bg); border: 1px solid #fff; }
+        .test-card.abnormal   { background: var(--color-abnormal-bg);   border: 1px solid #fff; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .card-name {
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-name .icon { font-size: 28px;filter: grayscale(1) brightness(0); }
+
+        .status-badge {
+            color: var(--color-badge-text);
+            font-size: 15px;
+            padding: 8px 8px;
+            border-radius: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .badge-normal     { background: var(--color-normal-dark); }
+        .badge-borderline { background: var(--color-borderline-dark); }
+        .badge-abnormal   { background: var(--color-abnormal-dark); }
+        .status-badge .trend-up,
+        .status-badge .trend-down,
+        .status-badge .trend-same { color: #fff; }
+
+        .card-value {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin: 6px 0;
+        }
+
+        .card-value strong {
+            font-size: 24px;
+            color: var(--color-text-primary);
+        }
+
+        .card-range {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .card-range strong {
+            font-size: 24px;
+            color: var(--color-text-primary);
+        }
+
+        /* ===== PAGE 5: ACTION PLAN ===== */
+        .action-card {
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 24px;
+        }
+
+        .action-card.warning  { background: var(--color-borderline-bg); border: 1px solid #fff176; }
+        .action-card.critical { background: var(--color-abnormal-bg);   border: 1px solid #ef9a9a; }
+
+        .action-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .action-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .action-desc {
+            font-size: 13px;
+            /* color: #555; */
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .suggestion-header {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .suggestion-text {
+            font-size: 13px;
+            /* color: #555; */
+            line-height: 1.6;
+        }
+
+        /* ===== PAGE 6: CLINICAL DATA ===== */
+        .clinical-category {
+            margin-bottom: 30px;
+        }
+
+        .clinical-category .badge-normal     { background: var(--color-normal-bg);     color: #000; }
+        .clinical-category .badge-borderline { background: var(--color-borderline-bg); color: #000; }
+        .clinical-category .badge-abnormal   { background: var(--color-abnormal-bg);   color: #000; }
+
+        .clinical-category .badge-normal .trend-same     { color: var(--color-normal-dark); }
+        .clinical-category .badge-borderline .trend-same { color: var(--color-borderline-dark); }
+        .clinical-category .badge-abnormal .trend-same   { color: var(--color-abnormal-dark); }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .category-name {
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--color-normal-bg);
+            border: 1px solid var(--color-normal-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .category-icon .icon-inner {
+            filter: grayscale(1) brightness(0);
+        }
+
+        .clinical-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 4px;
+        }
+
+        .clinical-table thead th {
+            font-size: 11px;
+            font-weight: 600;
+            background-color: var(--color-neutral-100);
+            text-align: left;
+            padding: 6px 12px;
+        }
+
+        .clinical-table thead th:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .clinical-table thead th:last-child {
+            text-align: center;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .clinical-table tbody td {
+            padding: 10px 12px;
+            font-size: 13px;
+            vertical-align: top;
+        }
+
+        .clinical-table tbody td:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .clinical-table tbody td:last-child {
+            text-align: center;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .range-cell {
+            font-size: 11px;
+            line-height: 1.5;
+            white-space: pre-line;
+        }
+
+        /* ===== PAGE 7: PERSONALISED GUIDANCE ===== */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 16px;
+        }
+
+        .chart-card {
+            position: relative;
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .chart-name {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .chart-canvas-wrap {
+            background: var(--color-surface);
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .chart-canvas-wrap canvas {
+            width: 100% !important;
+            height: 140px !important;
+        }
+
+        .chart-desc {
+            font-size: 11px;
+            line-height: 1.5;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .tips-section h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .tip-card {
+            text-align: center;
+        }
+
+        .tip-icon {
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+
+        .tip-title {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .tip-desc {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            line-height: 1.4;
+        }
+
+        .lower-charts {
+            margin-top: 16px;
+        }
+
+        /* ===== PAGE 8: CHEAT SHEET ===== */
+        .cheat-card {
+            border: 4px dashed #444;
+            border-radius: 28px;
+            padding: 0 2rem 1.6rem;
+            margin: 26px 0 20px;
+            position: relative;
+            font-family: 'Comic Sans MS', 'Segoe Print', cursive;
+        }
+
+        .cheat-tab {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            background: #1a1a1a;
+            color: #fff;
+            font-family: 'Comic Sans MS', 'Segoe Print', cursive;
+            font-size: 17px;
+            font-weight: 400;
+            padding: 6px 16px;
+            border-radius: 22px;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+        }
+
+        .cheat-questions {
+            margin-top: 30px;
+            list-style: none;
+        }
+
+        .cheat-questions li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 14px;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5;
+            font-family: 'Comic Sans MS', 'Segoe Print', cursive;
+        }
+
+        .checkbox-icon {
+            width: 26px;
+            height: 26px;
+            min-width: 26px;
+            border: 3.5px solid #333;
+            border-radius: 9px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            background: #fff;
+        }
+
+        .qr-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .qr-section h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+        }
+
+        .qr-code {
+            margin: 0 auto;
+        }
+
+        .qr-url {
+            font-size: 13px;
+            color: var(--color-link);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== PAGE 1: COVER ==================== -->
+<div class="page" id="page-cover">
+    <div class="page-content">
+        <p class="cover-patient">{{ cover.patient_name }}</p>
+        <hr class="cover-divider">
+        <h1 class="cover-title">{{ cover.title }}<br>{{ cover.title_sub }}</h1>
+        <hr class="cover-divider">
+        <p class="cover-id">{{ cover.report_id }}</p>
+
+        <div class="cover-heart">
+            {{ svg.cover_art }}
+
+        </div>
+    </div>
+    <div class="logo">
+        {{ svg.logo }}
+    </div>
+</div>
+
+<!-- ==================== PAGE 2: HOW TO READ ==================== -->
+<div class="page" id="page-howto">
+    <div class="page-content">
+        <div class="section-heading">
+            <h1 class="report-title">{{ meta.organization_name }} Health Analytics Report</h1>
+            <hr class="title-divider">
+        </div>
+        <p class="section-desc">{{ meta.disclaimer }}</p>
+
+        <div class="section-heading" style="margin-top:30px;">
+            <h1 class="section-title" style="margin-top:0;">How to Read the Report</h2>
+            <hr class="title-divider">
+        </div>
+        <p class="section-desc">Below are the sections which depict what you can expect from this report, how you can read this report and use it for your wellbeing.</p>
+
+        <ul class="sections-list">
+            {{ for section in meta.sections }}
+            <li>
+                <span class="sec-name">{{ section.name }}</span>
+                <div class="sec-desc">
+                    <span>{{ section.description }}</span>
+                    <div class="sec-placeholder"></div>
+                </div>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+    
+    <div class="logo">
+        {{ svg.logo }}
+    </div>
+    <div class="footer-stripe">
+        {{ svg.footer_stripe }}
+    </div>
+</div>
+
+<!-- ==================== PAGE 3: HEALTH SUMMARY ==================== -->
+<div class="page" id="page-health-summary">
+    <div class="page-content">
+        <!-- Stepper -->
+        <div class="stepper">
+            {{ steps = ["Health Summary", "Test Summary", "Action Plan", "Clinical Data", "Personalised Suggestions", "Doctor Cheat-sheet"] }}
+            {{ step_ids = ["page-health-summary", "page-test-summary", "page-action-plan", "page-clinical-data", "page-guidance", "page-cheatsheet"] }}
+            {{ for step in steps }}
+            <div class="stepper-item">
+                <a href="#{{ step_ids[for.index] }}" class="stepper-link">
+                    <div class="stepper-dot {{ if step == "Health Summary" }}active{{ end }}">
+                        {{ if step == "Health Summary" }}{{ svg.stepper_health_summary }}{{ end }}
+                    </div>
+                    <span class="stepper-label {{ if step == "Health Summary" }}active{{ end }}">{{ step }}</span>
+                </a>
+            </div>
+            {{ end }}
+        </div>
+
+        <div class="score-section">
+            <div class="score-info">
+                <div class="section-heading">
+                    <h2 class="section-title" style="margin-top:0;">Health Score</h2>
+                    <hr class="title-divider">
+                </div>
+                <p>This section summarizes your current health status as a single score out of {{ health_summary.max_score }}, based on the findings in this report. A higher score indicates better overall health relative to the reference ranges used in this assessment.</p>
+            </div>
+            <div class="score-circle">
+                <div class="score-dots-container"></div>
+                <div class="gauge-wrapper">
+                    {{ svg.gauge }}
+                </div>
+                <div class="score-value">
+                    <span class="num score-num">0</span>
+                    <span class="label">out of {{ health_summary.max_score }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-header-block">
+            <div class="section-heading">
+                <h2 class="section-title">Your Health Summary</h2>
+                <hr class="title-divider">
+            </div>
+            <p class="section-desc">{{ health_summary.message }}</p>
+            <p class="section-desc">{{ health_summary.sub_message }}</p>
+        </div>
+
+        <table class="param-table">
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Previous</th>
+                    <th>Current</th>
+                    <th>Trend</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ for param in health_summary.parameters }}
+                <tr class="row-{{ param.status }}">
+                    <td><span class="param-icon">{{ param.icon }}</span> {{ param.name }}</td>
+                    <td>{{ param.previous }}</td>
+                    <td>{{ param.current }}</td>
+                    <td>
+                        {{ if param.trend == "up" }}<span class="trend-up"><svg viewBox="0 0 195 248" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M91.7041 2.45281C94.8512 -0.817663 100.086 -0.817541 103.233 2.45281L192.687 95.4157C197.577 100.498 193.975 108.963 186.922 108.963H147.469V230.463C147.469 239.851 139.858 247.463 130.469 247.463H64.4688C55.0801 247.462 47.4688 239.851 47.4688 230.463V108.963H8.01565C0.962755 108.962 -2.63902 100.498 2.251 95.4157L91.7041 2.45281Z" fill="currentColor"/></svg></span>
+                        {{ else if param.trend == "down" }}<span class="trend-down"><svg viewBox="0 0 195 248" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M103.234 245.01C100.087 248.28 94.8515 248.28 91.7043 245.01L2.25122 152.047C-2.63916 146.964 0.96265 138.5 8.01587 138.5L47.469 138.5L47.469 17C47.4691 7.61117 55.0802 -4.57764e-05 64.469 -4.57764e-05L130.469 -4.57764e-05C139.858 5.40813e-05 147.469 7.61123 147.469 17L147.469 138.5H186.922C193.975 138.5 197.577 146.964 192.687 152.047L103.234 245.01Z" fill="currentColor"/></svg></span>
+                        {{ else }}<span class="trend-same"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" style="width:10px;height:10px;vertical-align:middle;"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg></span>{{ end }}
+                    </td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+    <div class="logo">
+        {{ svg.logo }}
+    </div>
+    <div class="footer-stripe">
+        {{ svg.footer_stripe }}
+    </div>
+</div>
+
+<!-- ==================== PAGE 4: TEST SUMMARY ==================== -->
+<div class="page" id="page-test-summary">
+    <div class="page-content">
+        <!-- Stepper -->
+        <div class="stepper">
+            {{ steps = ["Health Summary", "Test Summary", "Action Plan", "Clinical Data", "Personalised Suggestions", "Doctor Cheat-sheet"] }}
+            {{ step_ids = ["page-health-summary", "page-test-summary", "page-action-plan", "page-clinical-data", "page-guidance", "page-cheatsheet"] }}
+            {{ for step in steps }}
+            <div class="stepper-item">
+                <a href="#{{ step_ids[for.index] }}" class="stepper-link">
+                    <div class="stepper-dot {{ if step == "Test Summary" }}active{{ end }}">
+                        {{ if step == "Test Summary" }}{{ svg.stepper_test_summary }}{{ end }}
+                    </div>
+                    <span class="stepper-label {{ if step == "Test Summary" }}active{{ end }}">{{ step }}</span>
+                </a>
+            </div>
+            {{ end }}
+        </div>
+
+        <div class="section-heading">
+            <h2 class="section-title">Your Important Parameters at a Glance</h2>
+            <hr class="title-divider">
+        </div>
+
+        <div class="cards-grid">
+            {{ for card in test_summary_cards }}
+            <div class="test-card {{ card.status }}">
+                <div class="card-header">
+                    <span class="card-name"><span class="icon">{{ card.icon }}</span> {{ card.name }}</span>
+                    <span class="status-badge badge-{{ card.status }}">
+                        {{ if card.trend == "up" }}<svg viewBox="0 0 195 248" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:10px;vertical-align:middle;"><path d="M91.7041 2.45281C94.8512 -0.817663 100.086 -0.817541 103.233 2.45281L192.687 95.4157C197.577 100.498 193.975 108.963 186.922 108.963H147.469V230.463C147.469 239.851 139.858 247.463 130.469 247.463H64.4688C55.0801 247.462 47.4688 239.851 47.4688 230.463V108.963H8.01565C0.962755 108.962 -2.63902 100.498 2.251 95.4157L91.7041 2.45281Z" fill="currentColor"/></svg>{{ else if card.trend == "down" }}<svg viewBox="0 0 195 248" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:10px;vertical-align:middle;"><path d="M103.234 245.01C100.087 248.28 94.8515 248.28 91.7043 245.01L2.25122 152.047C-2.63916 146.964 0.96265 138.5 8.01587 138.5L47.469 138.5L47.469 17C47.4691 7.61117 55.0802 -4.57764e-05 64.469 -4.57764e-05L130.469 -4.57764e-05C139.858 5.40813e-05 147.469 7.61123 147.469 17L147.469 138.5H186.922C193.975 138.5 197.577 146.964 192.687 152.047L103.234 245.01Z" fill="currentColor"/></svg>{{ else }}<svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" style="width:10px;height:10px;vertical-align:middle;"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg>{{ end }}
+                        {{ if card.status == "normal" }}Normal{{ else if card.status == "borderline" }}Borderline{{ else }}Abnormal{{ end }}
+                    </span>
+                </div>
+                <p class="card-value">Value: <strong>{{ card.value }}{{ card.unit }}</strong></p>
+                <p class="card-range">Range: <strong>{{ card.range }}</strong></p>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+    <div class="logo">
+        {{ svg.logo }}
+    </div>
+    <div class="footer-stripe">
+        {{ svg.footer_stripe }}
+    </div>
+</div>
+
+<!-- ==================== PAGE 5: ACTION PLAN ==================== -->
+<div class="page" id="page-action-plan">
+    <div class="page-content">
+        <!-- Stepper -->
+        <div class="stepper">
+            {{ steps = ["Health Summary", "Test Summary", "Action Plan", "Clinical Data", "Personalised Suggestions", "Doctor Cheat-sheet"] }}
+            {{ step_ids = ["page-health-summary", "page-test-summary", "page-action-plan", "page-clinical-data", "page-guidance", "page-cheatsheet"] }}
+            {{ for step in steps }}
+            <div class="stepper-item">
+                <a href="#{{ step_ids[for.index] }}" class="stepper-link">
+                    <div class="stepper-dot {{ if step == "Action Plan" }}active{{ end }}">
+                        {{ if step == "Action Plan" }}{{ svg.stepper_action_plan }}{{ end }}
+                    </div>
+                    <span class="stepper-label {{ if step == "Action Plan" }}active{{ end }}">{{ step }}</span>
+                </a>
+            </div>
+            {{ end }}
+        </div>
+
+        <div class="section-heading">
+            <h2 class="section-title">Your Parameters That Need Attention</h2>
+            <hr class="title-divider">
+        </div>
+
+        {{ for item in action_plan }}
+        <div class="action-card {{ item.severity }}">
+            <div class="action-icon"><img src="{{ svg_uri.action_test_tube }}" width="28" height="24" style="vertical-align:middle"></div>
+            <h3 class="action-title">{{ item.parameter_name }}{{ if item.value != "" }}: {{ item.value }}{{ end }}</h3>
+            <p class="action-desc">{{ item.description }}</p>
+
+            <div class="suggestion-header"><img src="{{ svg_uri.suggestion_brain }}" width="28" height="24" style="vertical-align:middle"> Suggestions</div>
+            <p class="suggestion-text">{{ item.suggestion }}</p>
+        </div>
+        {{ end }}
+    </div>
+    <div class="logo">
+        {{ svg.logo }}
+    </div>
+    <div class="footer-stripe">
+        {{ svg.footer_stripe }}
+    </div>
+</div>
+
+<!-- ==================== PAGE 6: CLINICAL DATA ==================== -->
+<div class="page" id="page-clinical-data">
+    <div class="page-content">
+        <!-- Stepper -->
+        <div class="stepper">
+            {{ steps = ["Health Summary", "Test Summary", "Action Plan", "Clinical Data", "Personalised Suggestions", "Doctor Cheat-sheet"] }}
+            {{ step_ids = ["page-health-summary", "page-test-summary", "page-action-plan", "page-clinical-data", "page-guidance", "page-cheatsheet"] }}
+            {{ for step in steps }}
+            <div class="stepper-item">
+                <a href="#{{ step_ids[for.index] }}" class="stepper-link">
+                    <div class="stepper-dot {{ if step == "Clinical Data" }}active{{ end }}">
+                        {{ if step == "Clinical Data" }}{{ svg.stepper_clinical_data }}{{ end }}
+                    </div>
+                    <span class="stepper-label {{ if step == "Clinical Data" }}active{{ end }}">{{ step }}</span>
+                </a>
+            </div>
+            {{ end }}
+        </div>
+
+        <div class="section-heading">
+            <h2 class="section-title">Clinical Data</h2>
+            <hr class="title-divider">
+        </div>
+
+        {{ for cat in clinical_data }}
+        <div class="clinical-category">
+            <div class="category-header">
+                <span class="category-name">
+                    <span class="category-icon"><span class="icon-inner">{{ cat.icon }}</span></span>
+                    {{ cat.category_name }}
+                </span>
+                <span class="status-badge badge-{{ cat.overall_status }}">
+                    <span class="trend-same"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" style="width:10px;height:10px;vertical-align:middle;"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg></span> {{ if cat.overall_status == "normal" }}Normal{{ else if cat.overall_status == "borderline" }}Borderline{{ else }}Abnormal{{ end }}
+                </span>
+            </div>
+
+            <table class="clinical-table">
+                <thead>
+                    <tr>
+                        <th>Test Name</th>
+                        <th>Result</th>
+                        <th>Unit</th>
+                        <th>Range</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ for test in cat.tests }}
+                    <tr class="row-{{ test.status }}">
+                        <td>{{ test.test_name }}</td>
+                        <td>{{ test.result }}</td>
+                        <td>{{ test.unit }}</td>
+                        <td class="range-cell">{{ test.range }}</td>
+                        <td>
+                            {{ if test.trend == "up" }}<span class="trend-up"><svg viewBox="0 0 195 248" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M91.7041 2.45281C94.8512 -0.817663 100.086 -0.817541 103.233 2.45281L192.687 95.4157C197.577 100.498 193.975 108.963 186.922 108.963H147.469V230.463C147.469 239.851 139.858 247.463 130.469 247.463H64.4688C55.0801 247.462 47.4688 239.851 47.4688 230.463V108.963H8.01565C0.962755 108.962 -2.63902 100.498 2.251 95.4157L91.7041 2.45281Z" fill="currentColor"/></svg></span>
+                            {{ else if test.trend == "down" }}<span class="trend-down"><svg viewBox="0 0 195 248" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M103.234 245.01C100.087 248.28 94.8515 248.28 91.7043 245.01L2.25122 152.047C-2.63916 146.964 0.96265 138.5 8.01587 138.5L47.469 138.5L47.469 17C47.4691 7.61117 55.0802 -4.57764e-05 64.469 -4.57764e-05L130.469 -4.57764e-05C139.858 5.40813e-05 147.469 7.61123 147.469 17L147.469 138.5H186.922C193.975 138.5 197.577 146.964 192.687 152.047L103.234 245.01Z" fill="currentColor"/></svg></span>
+                            {{ else }}<span class="trend-same"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" style="width:10px;height:10px;vertical-align:middle;"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg></span>{{ end }}
+                        </td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+        {{ end }}
+    </div>
+    <div class="logo">
+        {{ svg.logo }}
+    </div>
+    <div class="footer-stripe">
+        {{ svg.footer_stripe }}
+    </div>
+</div>
+
+<!-- ==================== PAGE 7: PERSONALISED GUIDANCE ==================== -->
+<div class="page" id="page-guidance">
+    <div class="page-content">
+        <!-- Stepper -->
+        <div class="stepper">
+            {{ steps = ["Health Summary", "Test Summary", "Action Plan", "Clinical Data", "Personalised Suggestions", "Doctor Cheat-sheet"] }}
+            {{ step_ids = ["page-health-summary", "page-test-summary", "page-action-plan", "page-clinical-data", "page-guidance", "page-cheatsheet"] }}
+            {{ for step in steps }}
+            <div class="stepper-item">
+                <a href="#{{ step_ids[for.index] }}" class="stepper-link">
+                    <div class="stepper-dot {{ if step == "Personalised Suggestions" }}active{{ end }}">
+                        {{ if step == "Personalised Suggestions" }}{{ svg.stepper_personalised }}{{ end }}
+                    </div>
+                    <span class="stepper-label {{ if step == "Personalised Suggestions" }}active{{ end }}">{{ step }}</span>
+                </a>
+            </div>
+            {{ end }}
+        </div>
+
+        <div class="section-heading">
+            <h2 class="section-title">Personalised Guidance</h2>
+            <hr class="title-divider">
+        </div>
+
+        <!-- Top 2 charts -->
+        <div class="charts-grid">
+            {{ idx = 0 }}
+            {{ for chart in personalised_guidance.charts }}
+                {{ if idx < 2 }}
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-name">{{ chart.test_name }}</span>
+                        <span class="status-badge badge-{{ chart.status }}">
+                            {{ if chart.status == "normal" }}<span class="trend-up"><svg viewBox="0 0 195 248" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;vertical-align:middle;"><path d="M91.7041 2.45281C94.8512 -0.817663 100.086 -0.817541 103.233 2.45281L192.687 95.4157C197.577 100.498 193.975 108.963 186.922 108.963H147.469V230.463C147.469 239.851 139.858 247.463 130.469 247.463H64.4688C55.0801 247.462 47.4688 239.851 47.4688 230.463V108.963H8.01565C0.962755 108.962 -2.63902 100.498 2.251 95.4157L91.7041 2.45281Z" fill="currentColor"/></svg></span>{{ else if chart.status == "abnormal" }}<span class="trend-down"><svg viewBox="0 0 195 248" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;vertical-align:middle;"><path d="M103.234 245.01C100.087 248.28 94.8515 248.28 91.7043 245.01L2.25122 152.047C-2.63916 146.964 0.96265 138.5 8.01587 138.5L47.469 138.5L47.469 17C47.4691 7.61117 55.0802 -4.57764e-05 64.469 -4.57764e-05L130.469 -4.57764e-05C139.858 5.40813e-05 147.469 7.61123 147.469 17L147.469 138.5H186.922C193.975 138.5 197.577 146.964 192.687 152.047L103.234 245.01Z" fill="currentColor"/></svg></span>{{ else }}<span class="trend-same"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" style="width:10px;height:10px;vertical-align:middle;"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg></span>{{ end }}
+                            {{ if chart.status == "normal" }}Normal{{ else if chart.status == "borderline" }}Borderline{{ else }}Abnormal{{ end }}
+                        </span>
+                    </div>
+                    <div class="chart-canvas-wrap">
+                        <canvas class="line-chart" data-chart-idx="{{ idx }}" width="320" height="140"></canvas>
+                    </div>
+                </div>
+                {{ end }}
+                {{ idx = idx + 1 }}
+            {{ end }}
+        </div>
+
+        <!-- Description from first chart -->
+        {{ if personalised_guidance.charts.size > 0 && personalised_guidance.charts[0].description != "" }}
+        <p class="chart-desc">{{ personalised_guidance.charts[0].description }}</p>
+        {{ end }}
+
+        <!-- Diet tips -->
+        <div class="tips-section">
+            <h3>Diet & Lifestyle Tips</h3>
+            <div class="tips-grid">
+                {{ for tip in personalised_guidance.diet_tips }}
+                <div class="tip-card">
+                    <div class="tip-icon">{{ if tip.title == "Exercise regularly" }}<img src="{{ svg_uri.exercise }}" width="32" height="32">{{ else if tip.title == "Lose weight" }}<img src="{{ svg_uri.lose_weight }}" width="32" height="32">{{ else if tip.title == "Avoid sweets" }}<img src="{{ svg_uri.avoid_sweets }}" width="32" height="32">{{ else if tip.title == "Carbohydrates" }}<img src="{{ svg_uri.carbohydrates }}" width="32" height="32">{{ else if tip.title == "Protein" }}<img src="{{ svg_uri.protein }}" width="32" height="32">{{ else if tip.title == "Vegetables & Fiber" }}<img src="{{ svg_uri.vegetables }}" width="32" height="32">{{ else }}{{ tip.icon }}{{ end }}</div>
+                    <div class="tip-title">{{ tip.title }}</div>
+                    <div class="tip-desc">{{ tip.description }}</div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+
+        <!-- Bottom 2 charts -->
+        <div class="charts-grid lower-charts">
+            {{ idx = 0 }}
+            {{ for chart in personalised_guidance.charts }}
+                {{ if idx >= 2 }}
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-name">{{ chart.test_name }}</span>
+                        <span class="status-badge badge-{{ chart.status }}">
+                            {{ if chart.status == "normal" }}<span class="trend-up"><svg viewBox="0 0 195 248" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;vertical-align:middle;"><path d="M91.7041 2.45281C94.8512 -0.817663 100.086 -0.817541 103.233 2.45281L192.687 95.4157C197.577 100.498 193.975 108.963 186.922 108.963H147.469V230.463C147.469 239.851 139.858 247.463 130.469 247.463H64.4688C55.0801 247.462 47.4688 239.851 47.4688 230.463V108.963H8.01565C0.962755 108.962 -2.63902 100.498 2.251 95.4157L91.7041 2.45281Z" fill="currentColor"/></svg></span>{{ else if chart.status == "abnormal" }}<span class="trend-down"><svg viewBox="0 0 195 248" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;vertical-align:middle;"><path d="M103.234 245.01C100.087 248.28 94.8515 248.28 91.7043 245.01L2.25122 152.047C-2.63916 146.964 0.96265 138.5 8.01587 138.5L47.469 138.5L47.469 17C47.4691 7.61117 55.0802 -4.57764e-05 64.469 -4.57764e-05L130.469 -4.57764e-05C139.858 5.40813e-05 147.469 7.61123 147.469 17L147.469 138.5H186.922C193.975 138.5 197.577 146.964 192.687 152.047L103.234 245.01Z" fill="currentColor"/></svg></span>{{ else }}<span class="trend-same"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" style="width:10px;height:10px;vertical-align:middle;"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg></span>{{ end }}
+                            {{ if chart.status == "normal" }}Normal{{ else if chart.status == "borderline" }}Borderline{{ else }}Abnormal{{ end }}
+                        </span>
+                    </div>
+                    <div class="chart-canvas-wrap">
+                        <canvas class="line-chart" data-chart-idx="{{ idx }}" width="320" height="140"></canvas>
+                    </div>
+                </div>
+                {{ end }}
+                {{ idx = idx + 1 }}
+            {{ end }}
+        </div>
+    </div>
+    <div class="logo">
+        {{ svg.logo }}
+    </div>
+    <div class="footer-stripe">
+        {{ svg.footer_stripe }}
+    </div>
+</div>
+
+<!-- ==================== PAGE 8: CHEAT SHEET ==================== -->
+<div class="page" id="page-cheatsheet">
+    <div class="page-content">
+        <!-- Stepper -->
+        <div class="stepper">
+            {{ steps = ["Health Summary", "Test Summary", "Action Plan", "Clinical Data", "Personalised Suggestions", "Doctor Cheat-sheet"] }}
+            {{ step_ids = ["page-health-summary", "page-test-summary", "page-action-plan", "page-clinical-data", "page-guidance", "page-cheatsheet"] }}
+            {{ for step in steps }}
+            <div class="stepper-item">
+                <a href="#{{ step_ids[for.index] }}" class="stepper-link">
+                    <div class="stepper-dot {{ if step == "Doctor Cheat-sheet" }}active{{ end }}">
+                        {{ if step == "Doctor Cheat-sheet" }}{{ svg.stepper_cheatsheet }}{{ end }}
+                    </div>
+                    <span class="stepper-label {{ if step == "Doctor Cheat-sheet" }}active{{ end }}">{{ step }}</span>
+                </a>
+            </div>
+            {{ end }}
+        </div>
+
+        <div class="section-heading">
+            <h2 class="section-title">Cheat-Sheet</h2>
+            <hr class="title-divider">
+        </div>
+
+        <div class="cheat-card">
+            <div class="cheat-tab">Things you can ask the doctor</div>
+            <ul class="cheat-questions">
+                {{ for question in cheat_sheet.questions }}
+                <li>
+                    <div class="checkbox-icon"></div>
+                    <span>{{ question }}</span>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+
+        <div class="qr-section">
+            <h3>Scan to View Your Report Online</h3>
+            <div class="qr-code"></div>
+            <p class="qr-url">{{ cheat_sheet.report_url }}</p>
+        </div>
+    </div>
+    <div class="logo">
+        {{ svg.logo }}
+    </div>
+    <div class="footer-stripe">
+        {{ svg.footer_stripe }}
+    </div>
+</div>
+
+<script>
+    // ===== SCORE GAUGE (all instances) =====
+    (function() {
+        const targetScore = {{ health_summary.score }};
+        const circumference = 628;
+
+        document.querySelectorAll('.score-dots-container').forEach(function(dotsContainer) {
+            const cx = 110, cy = 110;
+            const rings = [
+            { radius: 85, count: 30, size: 5, opacity: 5, color: '#A0A0A0' },
+            { radius: 100, count: 28, size: 6, opacity: 2, color: '#C0C0C0' },
+            { radius: 115, count: 25, size: 8, opacity: 1.5 }
+            ];
+            rings.forEach(function(ring) {
+                for (var i = 0; i < ring.count; i++) {
+                    var angle = (Math.PI * 2 / ring.count) * i;
+                    var x = cx + ring.radius * Math.cos(angle);
+                    var y = cy + ring.radius * Math.sin(angle);
+                    var dot = document.createElement('div');
+                    dot.className = 'score-dot';
+                    dot.style.width  = ring.size + 'px';
+                    dot.style.height = ring.size + 'px';
+                    dot.style.opacity = ring.opacity;
+                    if (ring.color) dot.style.background = ring.color;
+                    dot.style.left = (x - ring.size / 2) + 'px';
+                    dot.style.top  = (y - ring.size / 2) + 'px';
+                    dotsContainer.appendChild(dot);
+                }
+            });
+        });
+
+        document.querySelectorAll('.score-num').forEach(function(numEl) {
+            numEl.textContent = targetScore;
+        });
+
+        document.querySelectorAll('.gauge-wrapper svg circle[stroke-dasharray]').forEach(function(ring) {
+            var offset = circumference - (targetScore / 100) * circumference;
+            ring.style.strokeDashoffset = offset;
+        });
+    })();
+
+    // ===== LINE CHARTS (all instances) =====
+    (function() {
+        const chartsData = [
+            {{ for chart in personalised_guidance.charts }}
+            {
+                labels: [{{ for dp in chart.average_data }}"{{ dp.label }}",{{ end }}],
+                data: [{{ for dp in chart.average_data }}{{ dp.value }},{{ end }}],
+                patientLabel: "{{ chart.patient_point?.label }}",
+                patientValue: {{ chart.patient_point?.value ?? 0 }},
+                status: "{{ chart.status }}"
+            },
+            {{ end }}
+        ];
+
+        document.querySelectorAll('.line-chart').forEach(function(canvas) {
+            var i = parseInt(canvas.getAttribute('data-chart-idx'));
+            var cd = chartsData[i];
+            if (!cd) return;
+
+            var statusColor = cd.status === 'normal' ? '#008400' : cd.status === 'borderline' ? '#866800' : '#8E0000';
+            var pIdx = cd.labels.indexOf(cd.patientLabel);
+            var pointBg = cd.labels.map(function(_, idx) { return idx === pIdx ? statusColor : 'transparent'; });
+            var pointR = cd.labels.map(function(_, idx) { return idx === pIdx ? 8 : 0; });
+
+            new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: cd.labels,
+                    datasets: [{
+                        label: 'Average',
+                        data: cd.data,
+                        borderColor: statusColor,
+                        backgroundColor: statusColor + '22',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: pointBg,
+                        pointRadius: pointR,
+                        pointBorderColor: pointBg,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    animation: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { min: 6, max: 9, ticks: { stepSize: 1, font: { size: 10 } }, grid: { display: false } },
+                        x: { ticks: { font: { size: 9 } }, grid: { display: false } }
+                    }
+                },
+                plugins: [{
+                    afterDatasetsDraw: function(chart) {
+                        if (pIdx < 0) return;
+                        var meta = chart.getDatasetMeta(0);
+                        var pt = meta.data[pIdx];
+                        var ctx = chart.ctx;
+                        ctx.save();
+                        ctx.fillStyle = '#333';
+                        ctx.font = '11px sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('You', pt.x, pt.y - 14);
+                        ctx.restore();
+                    }
+                }]
+            });
+        });
+    })();
+
+    // ===== QR CODE (all instances) =====
+    (function() {
+        const url = "{{ cheat_sheet.qr_code_url }}";
+        if (!url) return;
+        const qr = qrcode(0, 'M');
+        qr.addData(url);
+        qr.make();
+        const svg = qr.createSvgTag(5, 0);
+        document.querySelectorAll('.qr-code').forEach(function(el) {
+            el.innerHTML = svg;
+        });
+    })();
+</script>
+
+</body>
+</html>

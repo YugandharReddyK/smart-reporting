@@ -1,0 +1,162 @@
+{
+  "cover": {
+    "patientName": "Mr. Ram Mohan",
+    "reportId": "250000514300377",
+    "title": "SMART",
+    "titleSub": "HEALTH REPORT",
+    "logoUrl": ""
+  },
+  "meta": {
+    "organizationName": "Agilus",
+    "disclaimer": "The investigations were conducted at Agilus Diagnostics using standardized, quality-controlled laboratory protocols, and the results should be interpreted in conjunction with the patient\u2019s clinical findings and other diagnostic information.",
+    "sections": [
+      { "name": "Health Summary", "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", "iconColor": "#4CAF50" },
+      { "name": "Test Summary", "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", "iconColor": "#2196F3" },
+      { "name": "Action Plan", "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", "iconColor": "#FF9800" },
+      { "name": "Clinical Data", "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", "iconColor": "#9C27B0" },
+      { "name": "Personalised Suggestions", "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", "iconColor": "#E91E63" },
+      { "name": "Doctor Cheat-sheet", "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", "iconColor": "#607D8B" }
+    ]
+  },
+  "healthSummary": {
+    "score": 88,
+    "maxScore": 100,
+    "message": "Congratulations, We have successfully completed your health diagnosis. This is a big step towards staying on top of your health and identify potential to improve!",
+    "subMessage": "Here\u2019s a breakdown of your overall health picture.",
+    "parameters": [
+      { "name": "Electrolytes", "icon": "\u26a1", "previous": "100", "current": "123", "trend": "up", "status": "normal" },
+      { "name": "Glucose", "icon": "\ud83d\udca7", "previous": "245", "current": "385", "trend": "up", "status": "normal" },
+      { "name": "Kidney Function", "icon": "\ud83d\udca7", "previous": "12", "current": "12", "trend": "same", "status": "borderline" },
+      { "name": "Liver Function", "icon": "\ud83d\udca7", "previous": "12", "current": "12", "trend": "same", "status": "borderline" },
+      { "name": "Cholesterol", "icon": "\ud83d\udca7", "previous": "34", "current": "18", "trend": "down", "status": "abnormal" },
+      { "name": "Iron Profile", "icon": "\ud83d\udca7", "previous": "34", "current": "18", "trend": "down", "status": "abnormal" }
+    ]
+  },
+  "testSummaryCards": [
+    { "name": "Glucose", "value": "132", "unit": "mg/dL", "range": "70.00-100.00", "status": "normal", "trend": "up", "icon": "\ud83d\udca7" },
+    { "name": "Glucose", "value": "132", "unit": "mg/dL", "range": "70.00-100.00", "status": "normal", "trend": "up", "icon": "\ud83d\udca7" },
+    { "name": "Liver Function", "value": "132", "unit": "mg/dL", "range": "70.00-100.00", "status": "abnormal", "trend": "down", "icon": "\ud83d\udca7" },
+    { "name": "Iron", "value": "132", "unit": "mg/dL", "range": "70.00-100.00", "status": "borderline", "trend": "same", "icon": "\ud83d\udca7" },
+    { "name": "Pancreas", "value": "132", "unit": "mg/dL", "range": "70.00-100.00", "status": "borderline", "trend": "same", "icon": "\ud83d\udca7" }
+  ],
+  "actionPlan": [
+    {
+      "parameterName": "LDL",
+      "value": "145",
+      "description": "LDL cholesterol of 145 mg/dL is elevated and, in many people, associated with a higher long-term risk of heart disease.",
+      "suggestion": "Choose more idli, dosa, and uttapam made with whole grains or fermented batters (ragi, red rice, millet), plenty of sambar and rasam with lots of vegetables and lentils, snack on sprouts/sundal instead of fried items, use groundnut/gingelly oil instead of vanaspati, and keep ghee, fried snacks, bakery items, and red-meat dishes occasional while staying active and maintaining a healthy weight.",
+      "severity": "warning"
+    },
+    {
+      "parameterName": "Hs-CRP",
+      "value": "",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "suggestion": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "severity": "critical"
+    }
+  ],
+  "clinicalData": [
+    {
+      "categoryName": "Glucose",
+      "icon": "\ud83d\udca7",
+      "overallStatus": "borderline",
+      "tests": [
+        { "testName": "Fasting Glucose Levels", "result": "105", "unit": "mg/dL", "range": "<=10 : Normal\n100-125 : Pre Diabetes\n>126 : Diabetes", "status": "borderline", "trend": "same" },
+        { "testName": "Post Prandial Glucose Levels", "result": "130", "unit": "mg/dL", "range": "<=140 mg/dl : Normal\n100-125 : Pre Diabetes\n>= 200 mg/dl : Diabetes", "status": "normal", "trend": "up" },
+        { "testName": "Glycosylated Hb", "result": "6.20", "unit": "%", "range": "<= 5.6 % - Normal\n5.7 - 6.4 % - Prediabetes\n>= 6.5 % - Diabetes", "status": "borderline", "trend": "same" }
+      ]
+    },
+    {
+      "categoryName": "Cholesterol",
+      "icon": "\ud83d\udca7",
+      "overallStatus": "borderline",
+      "tests": [
+        { "testName": "Tryglycerides (Fasting Sample)", "result": "105", "unit": "mg/dL", "range": "<=10 : Normal\n100-125 : Pre Diabetes\n>126 : Diabetes", "status": "borderline", "trend": "same" },
+        { "testName": "HDL Cholesterol", "result": "130", "unit": "mg/dL", "range": "<=140 mg/dl : Normal\n100-125 : Pre Diabetes\n>= 200 mg/dl : Diabetes", "status": "normal", "trend": "up" },
+        { "testName": "LDL Cholesterol", "result": "6.20", "unit": "%", "range": "<= 5.6 % - Normal\n5.7 - 6.4 % - Prediabetes\n>= 6.5 % - Diabetes", "status": "borderline", "trend": "same" }
+      ]
+    }
+  ],
+  "personalisedGuidance": {
+    "charts": [
+      {
+        "testName": "Blood Sugar (Postprandial)",
+        "status": "borderline",
+        "averageData": [
+          { "label": "Dec 18", "value": 7.8 },
+          { "label": "Jan 19", "value": 8.1 },
+          { "label": "Feb 19", "value": 7.5 },
+          { "label": "Mar 19", "value": 7.2 },
+          { "label": "Apr 19", "value": 7.8 },
+          { "label": "May 19", "value": 8.5 },
+          { "label": "Jun 19", "value": 8.2 }
+        ],
+        "patientPoint": { "label": "Feb 19", "value": 8.0 },
+        "description": "It estimates the level of glucose in your blood after a meal. Ideally, a blood sample is taken 2 hours after you have orally ingested a set amount of sugar. Impaired glucose tolerance and prediabetes can be diagnosed using this test. This test is helpful in early diagnosis of type 2 diabetes."
+      },
+      {
+        "testName": "Calcium Total, Serum",
+        "status": "normal",
+        "averageData": [
+          { "label": "Dec 18", "value": 7.6 },
+          { "label": "Jan 19", "value": 8.0 },
+          { "label": "Feb 19", "value": 7.3 },
+          { "label": "Mar 19", "value": 7.5 },
+          { "label": "Apr 19", "value": 7.8 },
+          { "label": "May 19", "value": 8.2 },
+          { "label": "Jun 19", "value": 8.0 }
+        ],
+        "patientPoint": { "label": "Feb 19", "value": 7.7 },
+        "description": ""
+      },
+      {
+        "testName": "Creatinine, Serum",
+        "status": "normal",
+        "averageData": [
+          { "label": "Dec 18", "value": 7.0 },
+          { "label": "Jan 19", "value": 7.2 },
+          { "label": "Feb 19", "value": 7.8 },
+          { "label": "Mar 19", "value": 8.1 },
+          { "label": "Apr 19", "value": 7.5 },
+          { "label": "May 19", "value": 7.3 },
+          { "label": "Jun 19", "value": 7.0 }
+        ],
+        "patientPoint": { "label": "Mar 19", "value": 8.0 },
+        "description": ""
+      },
+      {
+        "testName": "Haemoglobin Hb",
+        "status": "normal",
+        "averageData": [
+          { "label": "Dec 18", "value": 7.5 },
+          { "label": "Jan 19", "value": 7.8 },
+          { "label": "Feb 19", "value": 7.6 },
+          { "label": "Mar 19", "value": 7.4 },
+          { "label": "Apr 19", "value": 7.2 },
+          { "label": "May 19", "value": 7.0 },
+          { "label": "Jun 19", "value": 6.8 }
+        ],
+        "patientPoint": { "label": "Feb 19", "value": 7.8 },
+        "description": ""
+      }
+    ],
+    "dietTips": [
+      { "title": "Exercise regularly", "description": "Helps boost your body's sensitivity to insulin", "icon": "🏃" },
+      { "title": "Lose weight", "description": "Obesity increases your risk for diabetes.", "icon": "⚖️" },
+      { "title": "Avoid sweets", "description": "Avoid sweets and soft drinks. Don't add sugar in foods and drinks.", "icon": "🚫" },
+      { "title": "Carbohydrates", "description": "Brown rice, ragi, whole wheat chapati, vegetable upma, vegetable pongal, rava dosa/idli", "icon": "🍚" },
+      { "title": "Protein", "description": "Sambar/dal, curd/buttermilk/paneer", "icon": "🥛" },
+      { "title": "Vegetables & Fiber", "description": "Poriyal, Kootu, Salads, Cabbage, Okra, Beans, Leafy greens", "icon": "🥗" }
+    ]
+  },
+  "cheatSheet": {
+    "questions": [
+      "Is further imaging (like CT, MRI, ultrasound, or repeat X-ray) needed to clarify this result?",
+      "Can I continue my usual work and routine, or do I need rest or any restrictions?",
+      "My HbA1c went up slightly. Should we adjust my diet or consider medication?",
+      "Do my liver enzymes indicate I should change any of my current supplements?"
+    ],
+    "qrCodeUrl": "https://repots.armedu.in/0193258caod01dgwsd-214e-",
+    "reportUrl": "https://repots.armedu.in/0193258caod01dgwsd-214e-"
+  }
+}
