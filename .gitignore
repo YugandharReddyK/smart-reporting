@@ -1,0 +1,16 @@
+# IDE folders/files
+.vs/
+.vscode/
+*.user
+*.suo
+
+# .NET build artifacts
+**/bin/
+**/obj/
+
+# Local caches/logs
+*.log
+*.tmp
+
+# Repository-specific generated output
+PdfGenerator/PdfGenerator/benchmark-output/

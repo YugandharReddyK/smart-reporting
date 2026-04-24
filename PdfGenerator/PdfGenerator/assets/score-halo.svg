@@ -1,0 +1,10 @@
+<svg width="280" height="280" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" transform="translate(140,140) rotate(-90)">
+    <!-- Layer 1: darkest -->
+    <circle r="88" stroke="#B7B7B7" stroke-width="3.8" stroke-linecap="round" stroke-dasharray="0.1 26.23"/>
+    <!-- Layer 2: medium -->
+    <circle r="102" stroke="#CDCDCD" stroke-width="4.3" stroke-linecap="round" stroke-dasharray="0.1 27.77"/>
+    <!-- Layer 3: lightest -->
+    <circle r="116" stroke="#E0E0E0" stroke-width="4.8" stroke-linecap="round" stroke-dasharray="0.1 30.27"/>
+  </g>
+</svg>

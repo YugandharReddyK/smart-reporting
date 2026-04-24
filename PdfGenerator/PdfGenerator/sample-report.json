@@ -1,0 +1,410 @@
+﻿{
+    "report":  {
+                   "branding":  {
+                                    "organisationName":  "Agilus Diagnostics",
+                                    "logoPath":  "assets/logo.svg",
+                                    "coverHeartPath":  "assets/cover-heart.png",
+                                    "footerRibbonPath":  "assets/footer-ribbon.png"
+                                },
+                   "generatedOn":  "2026-04-22T05:12:38Z",
+                   "patient":  {
+                                   "reportId":  "250000514300377",
+                                   "name":  "Mr. Ram Mohan",
+                                   "age":  39,
+                                   "gender":  "Male",
+                                   "dateOfBirth":  "1986-08-15",
+                                   "provider":  "City Care Hospital"
+                               },
+                   "cover":  {
+                                 "greetingName":  "Mr. Ram Mohan",
+                                 "primaryTitle":  "SMART",
+                                 "secondaryTitle":  "HEALTH REPORT"
+                             },
+                   "introduction":  {
+                                        "analyticsTitle":  "Agilus Health Analytics Report",
+                                        "analyticsText":  "Tests were conducted using standardized protocols. Results reflect your health status and must be interpreted with your clinical symptoms and medical history. This report supports, not replaces, consultation with your doctor.",
+                                        "readTitle":  "How to Read the Report",
+                                        "readText":  "Color-coded sections: green (normal), yellow (borderline), red (abnormal). Start with the Action Plan and Cheat-Sheet before your doctor visit. Compare with previous reports.",
+                                        "overviewItems":  [
+                                                              {
+                                                                  "title":  "Health Summary",
+                                                                  "description":  "A concise but meaningful snapshot of your current health score, key parameters, and trend direction compared to prior values. This section helps you quickly identify where your health is stable, where it is improving, and which markers need immediate attention before they progress further. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                              },
+                                                              {
+                                                                  "title":  "Test Summary",
+                                                                  "description":  "A visual card-based summary of your most clinically relevant lab markers, grouped by status using clear color coding for normal, borderline, and abnormal values. It is designed for rapid scanning so you can focus on high-priority findings even before reading the full report details. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                              },
+                                                              {
+                                                                  "title":  "Action Plan",
+                                                                  "description":  "A focused interpretation of parameters that currently require action, including clinical context, possible health implications, and practical next steps. Each item includes targeted lifestyle guidance and discussion points you can take to your doctor for a personalized treatment strategy. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                              },
+                                                              {
+                                                                  "title":  "Clinical Data",
+                                                                  "description":  "A detailed section containing grouped laboratory tables with each test name, measured value, unit, reference interval, and a quick severity indicator. This is the most complete view of your diagnostics and is useful for physician review, second opinions, and long-term record tracking. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                              },
+                                                              {
+                                                                  "title":  "Personalised Suggestions",
+                                                                  "description":  "Personalized guidance blocks that translate your lab trends into actionable daily habits covering diet quality, meal timing, physical activity, sleep, hydration, and stress management. The recommendations are intentionally practical so you can begin improvement immediately and monitor progress by your next test cycle. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                              },
+                                                              {
+                                                                  "title":  "Doctor Cheat-sheet",
+                                                                  "description":  "A ready-to-use consultation checklist with clinically relevant questions you can ask your doctor to make appointments more productive and decision-focused. It also includes quick digital access guidance so you can share your report, compare past results, and discuss follow-up timelines with confidence. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                              }
+                                                          ]
+                                    },
+                   "healthSummary":  {
+                                         "scoreTitle":  "Health Score",
+                                         "scoreDescription":  "Health Score out of 100. 80–100: healthy with minor areas to watch. 60–79: areas need attention. Below 60: prompt medical review needed.",
+                                         "scoreValue":  88,
+                                         "scoreMax":  100,
+                                         "summaryTitle":  "Your Health Summary",
+                                         "summaryIntro":  "Key parameters compared to your previous test. Parameters trending in the wrong direction should be discussed with your doctor.",
+                                         "rows":  [
+                                                      {
+                                                          "name":  "Electrolytes",
+                                                          "previous":  "100",
+                                                          "current":  "123",
+                                                          "trend":  "up",
+                                                          "status":  "normal"
+                                                      },
+                                                      {
+                                                          "name":  "Glucose",
+                                                          "previous":  "245",
+                                                          "current":  "385",
+                                                          "trend":  "up",
+                                                          "status":  "normal"
+                                                      },
+                                                      {
+                                                          "name":  "Kidney Function",
+                                                          "previous":  "12",
+                                                          "current":  "12",
+                                                          "trend":  "neutral",
+                                                          "status":  "borderline"
+                                                      },
+                                                      {
+                                                          "name":  "Liver Function",
+                                                          "previous":  "12",
+                                                          "current":  "12",
+                                                          "trend":  "neutral",
+                                                          "status":  "borderline"
+                                                      },
+                                                      {
+                                                          "name":  "Hs-CRP",
+                                                          "previous":  "34",
+                                                          "current":  "18",
+                                                          "trend":  "down",
+                                                          "status":  "abnormal"
+                                                      },
+                                                      {
+                                                          "name":  "HbA1c",
+                                                          "previous":  "34",
+                                                          "current":  "18",
+                                                          "trend":  "down",
+                                                          "status":  "abnormal"
+                                                      }
+                                                  ]
+                                     },
+                   "testSummary":  {
+                                       "title":  "Your Important Parameters at a Glance",
+                                       "cards":  [
+                                                     {
+                                                         "name":  "Glucose",
+                                                         "value":  "132 mg/dL",
+                                                         "range":  "70.00-100.00",
+                                                         "status":  "normal"
+                                                     },
+                                                     {
+                                                         "name":  "Calcium",
+                                                         "value":  "132 mg/dL",
+                                                         "range":  "70.00-100.00",
+                                                         "status":  "normal"
+                                                     },
+                                                     {
+                                                         "name":  "Liver Function",
+                                                         "value":  "132 mg/dL",
+                                                         "range":  "70.00-100.00",
+                                                         "status":  "abnormal"
+                                                     },
+                                                     {
+                                                         "name":  "Iron",
+                                                         "value":  "132 mg/dL",
+                                                         "range":  "70.00-100.00",
+                                                         "status":  "borderline"
+                                                     },
+                                                     {
+                                                         "name":  "Pancreas",
+                                                         "value":  "132 mg/dL",
+                                                         "range":  "70.00-100.00",
+                                                         "status":  "borderline"
+                                                     }
+                                                 ]
+                                   },
+                   "actionPlan":  {
+                                      "title":  "Your Parameters That Need Attention",
+                                      "cards":  [
+                                                    {
+                                                        "name":  "LDL: 145",
+                                                        "summary":  "LDL cholesterol at 145 mg/dL is above optimal target (100 mg/dL). High LDL with elevated blood sugar and Hs-CRP increases cardiovascular risk. Dietary changes and exercise can reduce this. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations.",
+                                                        "suggestions":  "Limit saturated fats and fried foods. Use sesame or olive oil. Increase soluble fiber (oats, dals, fruits). Exercise 40 min, 5x/week. Replace white rice with brown rice or whole grains. Discuss statins with doctor if needed. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations.",
+                                                        "status":  "borderline"
+                                                    },
+                                                    {
+                                                        "name":  "Hs-CRP",
+                                                        "summary":  "Hs-CRP is elevated, indicating systemic inflammation. Combined with borderline LDL and glucose, this suggests early metabolic syndrome risk. Address inflammation to prevent type 2 diabetes and heart disease. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations.",
+                                                        "suggestions":  "Anti-inflammatory diet: turmeric, ginger, garlic, omega-3s (fish, walnuts, flaxseed). Avoid trans fats. Sleep 7-8 hours. Quit smoking. Reduce alcohol. Exercise 30-40 min daily. Retest in 6-8 weeks. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations.",
+                                                        "status":  "abnormal"
+                                                    }
+                                                ]
+                                  },
+                   "clinicalData":  {
+                                        "title":  "Clinical Data",
+                                        "groups":  [
+                                                       {
+                                                           "name":  "Glucose #1",
+                                                           "status":  "borderline",
+                                                           "rows":  [
+                                                                        {
+                                                                            "testName":  "Fasting Glucose Levels #1",
+                                                                            "result":  "105",
+                                                                            "unit":  "mg/dL",
+                                                                            "range":  "\u003c=100 Normal; 100-125 Pre Diabetes; \u003e=126 Diabetes | Note: verify trend correlation with prior cycle and physician recommendations.",
+                                                                            "level":  "borderline"
+                                                                        },
+                                                                        {
+                                                                            "testName":  "Post Prandial Glucose Levels #1",
+                                                                            "result":  "130",
+                                                                            "unit":  "mg/dL",
+                                                                            "range":  "\u003c=140 Normal; 100-125 Pre Diabetes; \u003e=200 Diabetes | Note: verify trend correlation with prior cycle and physician recommendations.",
+                                                                            "level":  "normal"
+                                                                        },
+                                                                        {
+                                                                            "testName":  "Glycosylated Hb #1",
+                                                                            "result":  "6.20",
+                                                                            "unit":  "%",
+                                                                            "range":  "\u003c=5.6 Normal; 5.7-6.4 Prediabetes; \u003e=6.5 Diabetes | Note: verify trend correlation with prior cycle and physician recommendations.",
+                                                                            "level":  "borderline"
+                                                                        }
+                                                                    ]
+                                                       }
+                                                   ]
+                                    },
+                   "personalisedGuidance":  {
+                                                "title":  "Personalised Guidance",
+                                                "tipsTitle":  "Diet \u0026 Lifestyle Tips",
+                                                "charts":  [
+                                                               {
+                                                                   "title":  "Blood Sugar (Postprandial)",
+                                                                   "status":  "borderline",
+                                                                   "yAxisLabel":  "mg/dL",
+                                                                   "currentValueLabel":  "You",
+                                                                   "description":  "Measures blood glucose 2 hours after meals. High levels indicate impaired insulin response and pre-diabetic risk. Portion control, whole grains, and post-meal walks help reduce this. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations.",
+                                                                   "dataPoints":  [
+                                                                                      {
+                                                                                          "date":  "Dec 18",
+                                                                                          "value":  145,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Jan 19",
+                                                                                          "value":  152,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Feb 19",
+                                                                                          "value":  148,
+                                                                                          "isCurrentPoint":  true
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Mar 19",
+                                                                                          "value":  142,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Apr 19",
+                                                                                          "value":  138,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "May 19",
+                                                                                          "value":  135,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Jun 19",
+                                                                                          "value":  132,
+                                                                                          "isCurrentPoint":  false
+                                                                                      }
+                                                                                  ]
+                                                               },
+                                                               {
+                                                                   "title":  "Calcium Total, Serum",
+                                                                   "status":  "normal",
+                                                                   "yAxisLabel":  "mg/dL",
+                                                                   "currentValueLabel":  "You",
+                                                                   "description":  "Normal serum calcium reflects healthy parathyroid function and vitamin D absorption. Important for bone density, nerve function, and muscle contraction. Maintain adequate dietary sources. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations.",
+                                                                   "dataPoints":  [
+                                                                                      {
+                                                                                          "date":  "Dec 18",
+                                                                                          "value":  8.2,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Jan 19",
+                                                                                          "value":  8.4,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Feb 19",
+                                                                                          "value":  8.3,
+                                                                                          "isCurrentPoint":  true
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Mar 19",
+                                                                                          "value":  8.5,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Apr 19",
+                                                                                          "value":  8.4,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "May 19",
+                                                                                          "value":  8.2,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Jun 19",
+                                                                                          "value":  8.1,
+                                                                                          "isCurrentPoint":  false
+                                                                                      }
+                                                                                  ]
+                                                               },
+                                                               {
+                                                                   "title":  "Creatinine, Serum",
+                                                                   "status":  "normal",
+                                                                   "yAxisLabel":  "mg/dL",
+                                                                   "currentValueLabel":  "You",
+                                                                   "dataPoints":  [
+                                                                                      {
+                                                                                          "date":  "Dec 18",
+                                                                                          "value":  0.9,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Jan 19",
+                                                                                          "value":  0.95,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Feb 19",
+                                                                                          "value":  0.92,
+                                                                                          "isCurrentPoint":  true
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Mar 19",
+                                                                                          "value":  0.88,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Apr 19",
+                                                                                          "value":  0.87,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "May 19",
+                                                                                          "value":  0.89,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Jun 19",
+                                                                                          "value":  0.86,
+                                                                                          "isCurrentPoint":  false
+                                                                                      }
+                                                                                  ]
+                                                               },
+                                                               {
+                                                                   "title":  "Haemoglobin Hb",
+                                                                   "status":  "normal",
+                                                                   "yAxisLabel":  "g/dL",
+                                                                   "currentValueLabel":  "You",
+                                                                   "dataPoints":  [
+                                                                                      {
+                                                                                          "date":  "Dec 18",
+                                                                                          "value":  14.2,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Jan 19",
+                                                                                          "value":  14.5,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Feb 19",
+                                                                                          "value":  14.1,
+                                                                                          "isCurrentPoint":  true
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Mar 19",
+                                                                                          "value":  14.8,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Apr 19",
+                                                                                          "value":  14.6,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "May 19",
+                                                                                          "value":  14.3,
+                                                                                          "isCurrentPoint":  false
+                                                                                      },
+                                                                                      {
+                                                                                          "date":  "Jun 19",
+                                                                                          "value":  14.0,
+                                                                                          "isCurrentPoint":  false
+                                                                                      }
+                                                                                  ]
+                                                               }
+                                                           ],
+                                                "tips":  [
+                                                             {
+                                                                 "title":  "Exercise regularly",
+                                                                 "description":  "Aim for at least 150 minutes of moderate-intensity exercise per week. Brisk walking, cycling, yoga, or swimming are all effective. Physical activity directly improves insulin sensitivity, reduces LDL cholesterol, lowers blood pressure, and reduces systemic inflammation markers like Hs-CRP — all of which are relevant to your current results. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                             },
+                                                             {
+                                                                 "title":  "Lose weight",
+                                                                 "description":  "Even a modest weight loss of 5 to 10% of body weight can significantly lower fasting glucose, LDL cholesterol, and inflammatory markers. Focus on calorie quality over restriction — reduce ultra-processed foods, liquid calories, and late-night eating rather than starving yourself. A sustainable deficit of 300 to 500 calories per day combined with exercise is the most effective long-term approach. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                             },
+                                                             {
+                                                                 "title":  "Avoid sweets and soft drinks",
+                                                                 "description":  "Excess sugar directly raises post-meal glucose, triglycerides, and liver fat. Avoid adding sugar to tea, coffee, or juices. Replace soft drinks and packaged fruit juices with buttermilk, coconut water, or plain water. Keep traditional sweets like ladoo, halwa, and barfi to once a week maximum, and avoid entirely during the 3-month dietary improvement window. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                             },
+                                                             {
+                                                                 "title":  "Carbohydrates",
+                                                                 "description":  "Carbohydrate quality matters more than quantity for blood sugar and cholesterol control. Prefer low-glycemic options: ragi mudde, barnyard millet, brown rice, whole wheat chapati, oats dosa, and vegetable upma. Avoid maida-based breads, biscuits, and noodles. Try to keep your meal\u0027s carbohydrate portion to less than half the plate while increasing vegetables and protein in the same meal. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                             },
+                                                             {
+                                                                 "title":  "Protein",
+                                                                 "description":  "Adequate protein intake slows glucose absorption, keeps you full longer, and helps preserve lean muscle mass during weight loss. At each meal, include at least one protein source: sambar, dal, moong sprouts, curd, low-fat paneer, eggs, boiled chicken, or fish. For a 70 kg individual, aiming for 70–90 grams of protein daily is a reasonable target. Distribute protein intake across all three meals rather than concentrating it in a single meal. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                             },
+                                                             {
+                                                                 "title":  "Vegetables \u0026 Fiber",
+                                                                 "description":  "Vegetables and dietary fiber slow carbohydrate absorption, reduce LDL cholesterol by binding bile acids in the gut, feed beneficial gut bacteria, and improve stool regularity. Target at least 3 to 4 cups of cooked vegetables daily. Focus on non-starchy options: spinach, drumstick leaves, bitter gourd, ridge gourd, beans, cabbage, and broccoli. Soluble fiber from okra, oats, and psyllium husk is particularly beneficial for LDL and glucose control. Eat whole fruits over juices to preserve fiber content. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations. This expanded narrative is included to provide additional clinical context, practical interpretation guidance, and follow-up checkpoints for review in subsequent consultations."
+                                                             }
+                                                         ]
+                                            },
+                   "cheatSheet":  {
+                                      "title":  "Cheat-Sheet",
+                                      "promptTitle":  "Things you can ask the doctor",
+                                      "questions":  [
+                                                        "Is further imaging (like CT, MRI, ultrasound, or repeat X-ray) needed to clarify this result?",
+                                                        "Can I continue my usual work and routine, or do I need rest or any restrictions?",
+                                                        "My HbA1c went up slightly. Should we adjust my diet or consider medication?",
+                                                        "Do my liver enzymes indicate I should change any of my current supplements?"
+                                                    ],
+                                      "qrTitle":  "Scan to View Your Report Online",
+                                      "qrUrl":  "https://repots.armedu.in/0193258caod01dgwusd-214e-"
+                                  }
+               }
+}
