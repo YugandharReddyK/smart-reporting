@@ -1,0 +1,5 @@
+services:
+  report-generator:
+    image: smarthealth
+    volumes:
+      - ./output:/output

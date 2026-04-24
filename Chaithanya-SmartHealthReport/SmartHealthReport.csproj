@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Playwright" Version="1.59.0" />
+    <PackageReference Include="SkiaSharp" Version="3.119.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\Assets\report.css" />
+    <EmbeddedResource Include="Templates\Assets\fonts.css" />
+    <EmbeddedResource Include="Templates\Assets\report.js" />
+    <EmbeddedResource Include="Templates\Assets\qrcode.min.js" />
+    <EmbeddedResource Include="Templates\Assets\logo.svg" />
+    <EmbeddedResource Include="Templates\Assets\heart.svg" />
+    <EmbeddedResource Include="Templates\Assets\color-trend.svg" />
+    <EmbeddedResource Include="Templates\Assets\exercise.svg" />
+    <EmbeddedResource Include="Templates\Assets\obesidad.svg" />
+    <EmbeddedResource Include="Templates\Assets\liquor.svg" />
+    <EmbeddedResource Include="Templates\Assets\low-carb-diet_6192227.svg" />
+    <EmbeddedResource Include="Templates\Assets\protein.svg" />
+    <EmbeddedResource Include="Templates\Assets\vegetables.svg" />
+  </ItemGroup>
+
+</Project>
