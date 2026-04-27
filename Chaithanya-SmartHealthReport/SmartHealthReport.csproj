@@ -28,4 +28,8 @@
     <EmbeddedResource Include="Templates\Assets\vegetables.svg" />
   </ItemGroup>
 
+  <Target Name="InstallPlaywrightBrowsers" AfterTargets="Build">
+    <Exec Command="pwsh $(OutputPath)playwright.ps1 install chromium" />
+  </Target>
+
 </Project>
