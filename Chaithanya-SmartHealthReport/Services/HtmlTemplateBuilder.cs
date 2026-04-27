@@ -26,8 +26,6 @@ public static class HtmlTemplateBuilder
             sb.Append($".chart-img-{i}{{background-image:url('data:image/png;base64,{chartImages[i]}');background-size:100% 100%;background-repeat:no-repeat;}}\n");
         sb.Append("</style>\n");
 
-        for (var iteration = 0; iteration < 19; iteration++)
-        {
             sb.Append(CoverPageBuilder.Build(data));
             sb.Append(HowToReadPageBuilder.Build());
             sb.Append(HealthSummaryPageBuilder.Build(data));
@@ -36,7 +34,7 @@ public static class HtmlTemplateBuilder
             sb.Append(ClinicalDataPageBuilder.Build(data));
             sb.Append(PersonalisedGuidancePageBuilder.Build(data, chartImages.Length));
             sb.Append(DoctorCheatSheetPageBuilder.Build(data));
-        }
+        
         
         sb.Append(ScriptDataBuilder.Build(data));
         sb.Append("</body></html>");
